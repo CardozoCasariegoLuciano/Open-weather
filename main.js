@@ -1,30 +1,31 @@
 (function () {
-  var win = window,
+  let win = window,
     data = [];
 
   get = function (event) {
     event.preventDefault();
 
-    var ciudadInput = document.getElementById("input_clima1");
+    const ciudadInput = document.getElementById("input_clima1");
 
-    var ciudadBuscada = ciudadInput.value;
+    const ciudadBuscada = ciudadInput.value;
+    let  ciudad
 
     if (ciudadBuscada.length > 0) {
       ciudadInput.value = "";
 
       if (isNaN(ciudadBuscada)) {
-        var ciudad =
+         ciudad =
           ciudadBuscada.charAt(0).toUpperCase() + ciudadBuscada.slice(1);
       } else {
-        var ciudad = ciudadBuscada;
+         ciudad = ciudadBuscada;
       }
 
       if (!this.existeEnData(ciudad)) {
-        var info = this.buscarAlApi(ciudad);
+        let info = this.buscarAlApi(ciudad);
         this.aplicarCambios(event);
         return info;
       } else {
-        var clima = data.find(
+        let clima = data.find(
           (elem) => elem.id == ciudad || elem.name == ciudad
         );
         this.alertarCiudadYaEnData();
@@ -38,9 +39,9 @@
   };
 
   buscarAlApi = function (ciudad) {
-    var api = new XMLHttpRequest();
-    var tipoDedato = isNaN(ciudad) ? "q=" : "id=";
-    var url =
+    let api = new XMLHttpRequest();
+    let tipoDedato = isNaN(ciudad) ? "q=" : "id=";
+    let url =
       "https://api.openweathermap.org/data/2.5/weather?" +
       tipoDedato +
       ciudad +
@@ -48,7 +49,7 @@
 
     api.open("GET", url, false);
     api.send();
-    var info = JSON.parse(api.response);
+    let info = JSON.parse(api.response);
 
     if (info.cod == 200) {
       data.push(info);
@@ -64,10 +65,10 @@
   };
 
   dibujarDATA = function (dataList) {
-    var root = document.getElementById("root");
+    let root = document.getElementById("root");
     root.innerHTML = "";
 
-    dataList.map(function (elem) {
+    dataList.map((elem) => {
       this.dibujarClimaEnDOM(elem);
     });
   };
@@ -76,15 +77,15 @@
     event.preventDefault();
     logicaDeOrdenado = this.getLogicaDeOrdenado();
 
-    var newData = data.sort(logicaDeOrdenado);
+    let newData = data.sort(logicaDeOrdenado);
     this.dibujarDATA(newData);
     this.actualizarHeaderRank();
   };
 
   getLogicaDeOrdenado = function () {
-    var radioNodeList = document.formOptios.orden;
-    var isDesc = radioNodeList[4].checked;
-    var funcRet;
+    let radioNodeList = document.formOptios.orden;
+    let isDesc = radioNodeList[4].checked;
+    let funcRet;
 
     for (i = 0; i < 4; i++) {
       if (radioNodeList[i].checked) {
@@ -148,10 +149,10 @@
   };
 
   dibujarClimaEnDOM = function (obj) {
-    var root = document.getElementById("root");
+    let root = document.getElementById("root");
 
     //div card
-    var nuevoClima = document.createElement("div");
+    let nuevoClima = document.createElement("div");
     nuevoClima.classList.add("elem_busqueda");
     nuevoClima.style.backgroundImage =
       "url(http://openweathermap.org/img/wn/" +
@@ -163,24 +164,24 @@
     nuevoClima.dataset.id = obj.id;
 
     //div contenedor de la informacion
-    var climaContent = document.createElement("div");
+    let climaContent = document.createElement("div");
     climaContent.classList.add("clima_content");
 
     //ID , Titulo y estado de la ciudad (header)
-    var climaContent_ID = document.createElement("p");
+    let climaContent_ID = document.createElement("p");
     climaContent_ID.classList.add("clima_content_id");
     climaContent_ID.textContent = obj.id;
 
-    var climaContent_H3 = document.createElement("h3");
+    let climaContent_H3 = document.createElement("h3");
     climaContent_H3.classList.add("clima_content_H3");
     climaContent_H3.textContent = obj.name;
 
-    var climaContent_estado = document.createElement("p");
+    let climaContent_estado = document.createElement("p");
     climaContent_estado.classList.add("clima_content_estado");
     climaContent_estado.textContent = obj.weather[0].description;
 
     //btn eliminar card
-    var btn_Eliminar_card = document.createElement("p");
+    let btn_Eliminar_card = document.createElement("p");
     btn_Eliminar_card.classList.add("btn_eliminar_Card");
     btn_Eliminar_card.textContent = "X";
     btn_Eliminar_card.setAttribute(
@@ -189,30 +190,30 @@
     );
 
     //div seccion datos (body)
-    var div_Data = document.createElement("div");
+    let div_Data = document.createElement("div");
     div_Data.classList.add("div_Data");
 
     //div seccion temperaturas
-    var div_temperatura = document.createElement("div");
+    let div_temperatura = document.createElement("div");
     div_temperatura.classList.add("clima_temp");
     //titulo seccion temperaturas
-    var temperaturaData_tit = document.createElement("h4");
+    let temperaturaData_tit = document.createElement("h4");
     temperaturaData_tit.classList.add("Data_tit");
     temperaturaData_tit.textContent = "Temperatura";
     //Temperatura actual titulo
-    var temperaturaData_actual_tit = document.createElement("h4");
+    let temperaturaData_actual_tit = document.createElement("h4");
     temperaturaData_actual_tit.classList.add("temperatura_tit");
     temperaturaData_actual_tit.textContent = "Actual";
     //Temperatura actual cont
-    var temperaturaData_actual_cont = document.createElement("p");
+    let temperaturaData_actual_cont = document.createElement("p");
     temperaturaData_actual_cont.classList.add("temperatura_contenido");
     temperaturaData_actual_cont.textContent = obj.main.temp;
     // titulo temperatura maxima/minima
-    var temperaturaData_maxmin_tit = document.createElement("h4");
+    let temperaturaData_maxmin_tit = document.createElement("h4");
     temperaturaData_maxmin_tit.classList.add("temperatura_tit");
     temperaturaData_maxmin_tit.textContent = "Maxima|Minima";
     //Temperatura minima/maxima
-    var temperaturaData_minima_cont = document.createElement("p");
+    let temperaturaData_minima_cont = document.createElement("p");
     temperaturaData_minima_cont.classList.add("temperatura_contenidoManMin");
     temperaturaData_minima_cont.innerHTML =
       "<span class='tempMax'>" +
@@ -223,39 +224,39 @@
       obj.main.temp_min +
       "</span> ";
     // titulo temperatura terminca
-    var temperaturaData_termica_tit = document.createElement("h4");
+    let temperaturaData_termica_tit = document.createElement("h4");
     temperaturaData_termica_tit.classList.add("temperatura_tit");
     temperaturaData_termica_tit.textContent = "Terminca";
     //Temperatura terminca
-    var temperaturaData_termica_cont = document.createElement("p");
+    let temperaturaData_termica_cont = document.createElement("p");
     temperaturaData_termica_cont.classList.add("temperatura_contenido");
     temperaturaData_termica_cont.innerHTML = obj.main.feels_like;
 
     //div humedad y viento
-    var div_humedad_viento = document.createElement("div");
+    let div_humedad_viento = document.createElement("div");
     div_humedad_viento.classList.add("div_humedadViento");
 
     //div seccion humedad
-    var div_humedad = document.createElement("div");
+    let div_humedad = document.createElement("div");
     div_humedad.classList.add("clima_humedad");
     //titulo seccion humedad
-    var humedad_tit = document.createElement("h4");
+    let humedad_tit = document.createElement("h4");
     humedad_tit.classList.add("Data_tit");
     humedad_tit.textContent = "Humedad";
     //humedad dato
-    var humedad_cont = document.createElement("p");
+    let humedad_cont = document.createElement("p");
     humedad_cont.classList.add("humedad_contenido");
     humedad_cont.innerHTML = obj.main.humidity;
 
     //div seccion viento
-    var div_viento = document.createElement("div");
+    let div_viento = document.createElement("div");
     div_viento.classList.add("clima_viento");
     //titulo seccion viento
-    var viento_tit = document.createElement("h4");
+    let viento_tit = document.createElement("h4");
     viento_tit.classList.add("Data_tit");
     viento_tit.textContent = "Viento";
     //viento dato
-    var viento_cont = document.createElement("p");
+    let viento_cont = document.createElement("p");
     viento_cont.classList.add("viento_contenido");
     viento_cont.innerHTML = (obj.wind.speed * 3.6).toFixed(1);
 
@@ -302,20 +303,20 @@
   actualizar = function (event) {
     event.preventDefault();
 
-    var root = document.getElementById("root");
+    let root = document.getElementById("root");
     root.innerHTML = "";
 
-    var newData = data;
+    let newData = data;
     data = [];
 
-    newData.forEach(function (elem) {
+    newData.forEach((elem) => {
       this.buscarAlApi(elem.id);
     });
 
     this.aplicarCambios(event);
     this.actualizarHeaderRank();
 
-    var alerta_footer = document.getElementById("alerta_footer");
+    let alerta_footer = document.getElementById("alerta_footer");
     alerta_footer.classList.remove("mostrarAlerta");
 
     this.actualizarBotones();
@@ -333,28 +334,28 @@
   };
 
   autoload = function (event) {
-    var checkBox = document.getElementById("checkbox_autoload");
-    var spanStatus = document.getElementById("AL_status");
+    let checkBox = document.getElementById("checkbox_autoload");
+    let spanStatus = document.getElementById("AL_status");
 
-    var intervalo, alertInterval;
+    let intervalo, alertInterval;
 
     if (checkBox.checked) {
       clearInterval(alertInterval);
       spanStatus.innerText = "ON";
 
-      intervalo = setInterval(function () {
+      intervalo = setInterval(() => {
         this.actualizar(event);
       }, /* 1000 */ 300000);
     } else {
-      alertInterval = setInterval(function () {
-        var alerta_footer = document.getElementById("alerta_footer");
-        var alerta_text = document.getElementById("alerta_footer_text");
+      alertInterval = setInterval(() => {
+        let alerta_footer = document.getElementById("alerta_footer");
+        let alerta_text = document.getElementById("alerta_footer_text");
         alerta_text.innerText = "Algunos climas estan desactualizados";
         alerta_footer.classList.add("mostrarAlerta");
       }, /* 2000 */ 9000000);
     }
 
-    checkBox.addEventListener("change", function () {
+    checkBox.addEventListener("change", () => {
       if (checkBox.checked) {
         clearInterval(alertInterval);
         if (navigator.cookieEnabled) {
@@ -362,7 +363,7 @@
         }
         spanStatus.innerText = "ON";
 
-        intervalo = setInterval(function () {
+        intervalo = setInterval(() => {
           this.actualizar(event);
         }, /* 1000 */ 300000);
       } else {
@@ -372,9 +373,9 @@
         }
         spanStatus.innerText = "OFF";
 
-        alertInterval = setInterval(function () {
-          var alerta_footer = document.getElementById("alerta_footer");
-          var alerta_text = document.getElementById("alerta_footer_text");
+        alertInterval = setInterval(() => {
+          let alerta_footer = document.getElementById("alerta_footer");
+          let alerta_text = document.getElementById("alerta_footer_text");
           alerta_text.innerText = "Algunos climas estan desactualizados";
           alerta_footer.classList.add("mostrarAlerta");
         }, /* 2000 */ 9000000);
@@ -385,12 +386,12 @@
   eliminarCard = function (event) {
     event.preventDefault();
 
-    var root = document.getElementById("root");
-    var self = event.path[2];
+    let root = document.getElementById("root");
+    let self = event.path[2];
 
     self_id = self.dataset.id;
 
-    data = data.filter(function (elem) {
+    data = data.filter((elem) => {
       return elem.id != self_id;
     });
 
@@ -408,18 +409,18 @@
 
     if (navigator.cookieEnabled) {
       if (localStorage.getItem("desc") == "true") {
-        var chackbox = document.getElementById("ord_asc");
+        let chackbox = document.getElementById("ord_asc");
         chackbox.setAttribute("checked", "");
       }
 
       if (localStorage.getItem("orderBy")) {
-        var orderTo = localStorage.getItem("orderBy");
-        var radio = document.getElementById(orderTo);
+        let orderTo = localStorage.getItem("orderBy");
+        let radio = document.getElementById(orderTo);
         radio.setAttribute("checked", "");
       }
 
       if (localStorage.getItem("autoload") == "false") {
-        var checkBox = document.getElementById("checkbox_autoload");
+        let checkBox = document.getElementById("checkbox_autoload");
         checkBox.removeAttribute("checked");
       }
 
@@ -429,15 +430,15 @@
         this.actualizar(event);
       }
     } else {
-      var alerta_modal = document.getElementById("modal_Alert_NoCookies");
-      var alerta_modal_text = document.getElementById(
+      let alerta_modal = document.getElementById("modal_Alert_NoCookies");
+      let alerta_modal_text = document.getElementById(
         "modal_Alert_text_NoCookies"
       );
       alerta_modal_text.innerText =
         "Local storage deshabilidato, los cambios no se persistiran";
       alerta_modal.classList.add("mostrarAlerta");
 
-      setTimeout(function () {
+      setTimeout(() => {
         alerta_modal.classList.remove("mostrarAlerta");
       }, 10000);
     }
@@ -450,16 +451,16 @@
   };
 
   actualizarHeaderRank = function () {
-    var textNOData = document.getElementById("topClimas_sinClimas");
-    var textTopFria = document.getElementById("topClimas_frio");
-    var textTopHumeda = document.getElementById("topClimas_humedo");
+    let textNOData = document.getElementById("topClimas_sinClimas");
+    let textTopFria = document.getElementById("topClimas_frio");
+    let textTopHumeda = document.getElementById("topClimas_humedo");
 
     if (data.length == 0) {
       textNOData.innerText = "Aun no has realizado ninguna busqueda";
       textTopFria.innerHTML = "";
       textTopHumeda.innerHTML = "";
     } else {
-      var masFria = data.sort(function (a, b) {
+      let masFria = data.sort(function (a, b) {
         if (a.main.temp > b.main.temp) {
           return 1;
         }
@@ -468,7 +469,7 @@
         }
       })[0];
 
-      var masHumeda = data.sort(function (a, b) {
+      let masHumeda = data.sort(function (a, b) {
         if (a.main.humidity > b.main.humidity) {
           return -1;
         }
@@ -490,11 +491,11 @@
   };
 
   animacionBTNactualizar = function () {
-    var divActualizar = document.getElementById("divBTN_actualizar");
-    var topHeigth = document.documentElement.scrollTop;
-    var topDiv = divActualizar.offsetTop;
+    let divActualizar = document.getElementById("divBTN_actualizar");
+    let topHeigth = document.documentElement.scrollTop;
+    let topDiv = divActualizar.offsetTop;
 
-    var btn_subir = document.getElementById("div_subir");
+    let btn_subir = document.getElementById("div_subir");
 
     if (topDiv > topHeigth) {
       divActualizar.classList.remove("efectoBTN_actualizar");
@@ -506,33 +507,33 @@
   };
 
   alertarCiudadNoValida = function () {
-    var parrafo = document.getElementById("formBusqueda_alertSection");
+    let parrafo = document.getElementById("formBusqueda_alertSection");
 
     parrafo.innerText = "La ciudad buscada no existe";
     parrafo.classList.remove("ciudadYaEnData");
     parrafo.classList.add("ciudadNoValida");
 
-    setTimeout(function () {
+    setTimeout(() => {
       parrafo.classList.remove("ciudadNoValida");
     }, 5000);
   };
 
   alertarCiudadYaEnData = function () {
-    var parrafo = document.getElementById("formBusqueda_alertSection");
+    let parrafo = document.getElementById("formBusqueda_alertSection");
 
     parrafo.innerText = "La ciudad buscada ya esta en la lista";
     parrafo.classList.remove("ciudadNoValida");
     parrafo.classList.add("ciudadYaEnData");
 
-    setTimeout(function () {
+    setTimeout(() => {
       parrafo.classList.remove("ciudadYaEnData");
     }, 5000);
   };
 
   actualizarBotones = function () {
-    var btn_ordenar = document.getElementById("btn_aplicar");
-    var btn_Eliminar = document.getElementById("btn-EliminarTodos");
-    var btn_Actualizar = document.getElementById("btn-actualizar");
+    let btn_ordenar = document.getElementById("btn_aplicar");
+    let btn_Eliminar = document.getElementById("btn-EliminarTodos");
+    let btn_Actualizar = document.getElementById("btn-actualizar");
 
     if (data.length == 0) {
       btn_ordenar.classList.add("desmarcarBTNs");
