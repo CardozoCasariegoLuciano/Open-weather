@@ -1,0 +1,524 @@
+:root {
+  --main-bg-color: rgb(201, 201, 201);
+  --topClimas-bg-color: rgba(168, 223, 116, 0.411);
+  --card-bg-color: rgba(80, 80, 200, 0.5);
+  --main-boxes-bg-color: rgba(0, 132, 255, 0.438);
+
+  --alert--bg-color: rgb(184, 11, 11);
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100% !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--main-bg-color);
+  font-family: sans-serif;
+  overflow: visible;
+}
+
+/* Modal de alerta */
+.modal_Alert {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: var(--alert--bg-color);
+  display: none;
+}
+
+.modal_Alert_text {
+  text-align: center;
+  color: #eee;
+  font-weight: bolder;
+}
+/* FIN Modal de alerta */
+
+/* Barra superior con los paises top */
+.topClimas {
+  height: 40px;
+  width: 100%;
+  background-color: var(--topClimas-bg-color);
+
+  box-shadow: 0px 0px 20px 0px black;
+}
+
+.topClimasConteiner {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  height: 100%;
+  width: 40%;
+  text-align: center;
+  margin: auto;
+}
+
+.topClimas p {
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.span_topClimas {
+  color: darkslateblue;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+/* FIN Barra superior */
+
+.conteiner {
+  width: 80%;
+  margin: auto;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+main h1 {
+  margin: 15px 0px 30px 0px;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.panelSection {
+  display: flex;
+  text-align: center;
+  margin-bottom: -5px;
+}
+
+.formBusqueda {
+  width: 350px;
+  height: 200px;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: var(--main-boxes-bg-color);
+  margin-right: 30px;
+  box-shadow: 0px 10px 20px 0px black;
+}
+
+.formBusqueda label {
+  display: block;
+  text-align: center;
+}
+
+.formBusqueda input {
+  padding: 5px;
+  width: 100%;
+  margin: auto;
+  border: none;
+  outline: none;
+  height: 25px;
+  margin: 10px 0px 15px 0px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.formBusqueda_alertSection {
+  width: 60%;
+  margin: auto;
+  padding: 5px;
+  margin-top: 20px;
+  border-radius: 10px;
+  color: #eee;
+  opacity: 0%;
+  transition: all.3s;
+  font-weight: bold;
+
+  opacity: 0%;
+}
+
+.ciudadNoValida {
+  opacity: 100%;
+  background-color: rgba(255, 0, 0, 0.45);
+  border: 1px solid red;
+}
+
+.ciudadYaEnData {
+  opacity: 100%;
+  background-color: rgba(28, 88, 20, 0.45);
+  border: 1px solid rgb(0, 195, 255);
+}
+
+.formBusqueda button,
+.btn_aplicar,
+.btn-actualizar,
+.btn-EliminarTodos {
+  width: 100px;
+  height: 25px;
+  border: none;
+  background-color: rgba(63, 91, 168, 0.719);
+  color: #eee;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  line-height: 25px;
+  cursor: pointer;
+}
+
+.divBTN_actualizar {
+  width: 400px;
+  border-radius: 0px 0px 100px 100px;
+
+  display: flex;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.btn-actualizar {
+  background-color: rgba(63, 91, 168, 1);
+  margin-bottom: 15px;
+  margin-top: 15px;
+
+  box-shadow: 10px 10px 15px -5px black;
+}
+
+.efectoBTN_actualizar {
+  position: sticky;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.9);
+
+  z-index: 100;
+}
+.div_subir {
+  margin-top: 15px;
+  display: none;
+}
+.btn_subir {
+  text-decoration: none;
+  color: #eee;
+  text-align: center;
+  background-color: rgba(63, 91, 168, 0.719);
+  margin: 15px 30px 15px 0px;
+  width: 50px;
+  height: 25px;
+  padding: 5px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  line-height: 25px;
+  cursor: pointer;
+}
+
+.mostrarBTN_subir {
+  display: block;
+}
+
+.btn_aplicar {
+  margin-top: 5px;
+}
+
+.btn-EliminarTodos {
+  background-color: darkred;
+  font-weight: 600;
+  width: 115px;
+}
+
+.formOptions {
+  width: 350px;
+  padding: 15px;
+  background-color: var(--main-boxes-bg-color);
+  border-radius: 10px;
+  margin-bottom: 25px;
+  font-size: 0.85rem;
+
+  display: flex;
+  justify-content: space-around;
+
+  box-shadow: 0px 10px 20px 0px black;
+}
+
+.configuracionDeOrden {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+}
+.configuracionDeOrden h3 {
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.configuracionDeOrden div {
+  margin: 5px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.configuracionDeOrden label {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.seccionMasOpciones {
+  padding: 0px 15px;
+  width: 150px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.autoLoadArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.autoLoadArea p {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.autoLoadArea p span {
+  font-weight: bold;
+}
+
+.seccionMasOpciones .chbx_area {
+  display: flex;
+  align-items: center;
+}
+.seccionMasOpciones .chbx_area label {
+  margin-left: 7px;
+  cursor: pointer;
+}
+
+.alertSecction {
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  background-color: var(--alert--bg-color);
+  display: none;
+}
+
+.alerta_text {
+  text-align: center;
+  line-height: 40px;
+  color: #eee;
+  font-weight: bolder;
+}
+
+.mostrarAlerta {
+  display: block;
+}
+
+.root {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+  margin-top: 20px;
+}
+
+/* Elementos Agregados al DOM con JS */
+.elem_busqueda {
+  height: 250px;
+  width: 400px;
+  border-radius: 30px;
+  background-color: var(--card-bg-color);
+
+  margin-bottom: 25px;
+  position: relative;
+  box-shadow: 5px 15px 20px -10px black;
+}
+
+.clima_content {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  padding: 10px;
+}
+
+.clima_content_id {
+  text-align: center;
+  font-size: 0.65rem;
+}
+
+.clima_content_H3 {
+  text-align: center;
+}
+.clima_content_estado {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.btn_eliminar_Card {
+  background-color: darkred;
+  color: #eee;
+  font-weight: bolder;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  border-radius: 100%;
+  border: 1px solid #333;
+  cursor: pointer;
+
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.div_Data {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.clima_temp,
+.clima_humedad,
+.clima_viento {
+  width: 100px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.clima_viento {
+  margin-top: 20px;
+}
+
+.Data_tit {
+  margin-bottom: 5px;
+}
+
+.temperatura_tit {
+  font-weight: normal;
+}
+
+.temperatura_contenido,
+.temperatura_contenidoManMin {
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.temperatura_contenido::after,
+.tempMax::after,
+.tempMin::after {
+  content: "°C";
+}
+.tempMax {
+  color: rgb(182, 73, 54);
+}
+
+.tempMin {
+  color: blue;
+}
+
+.humedad_contenido::after {
+  content: "% RH";
+}
+
+.viento_contenido::after {
+  content: " Km/h";
+}
+
+.desmarcarBTNs {
+  background-color: rgb(53, 50, 50);
+  color: grey;
+}
+
+@media (max-width: 1390px) {
+  .topClimasConteiner {
+    width: 60%;
+  }
+}
+
+@media (max-width: 920px) {
+  .topClimasConteiner {
+    width: 80%;
+  }
+
+  .panelSection {
+    flex-direction: column;
+  }
+
+  .formBusqueda {
+    margin-right: 0px;
+    margin-bottom: 15px;
+
+    height: 185px;
+  }
+}
+
+@media (max-width: 550px) {
+  .modal_Alert {
+    width: 85%;
+  }
+
+  .topClimasConteiner {
+    width: 90%;
+  }
+
+  main h1 {
+    font-size: 1.5rem;
+  }
+
+  .root {
+    width: 100vw;
+  }
+
+  .elem_busqueda {
+    width: 98%;
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+  }
+}
+
+@media (max-width: 290px) {
+  .topClimasConteiner {
+    width: 100%;
+  }
+  .modal_Alert {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .topClimas {
+    height: 55px;
+  }
+
+  .ciudadNoValida {
+    margin-top: 10px;
+  }
+
+  .formBusqueda {
+    width: 250px;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+
+  .formOptions {
+    width: 250px;
+    margin: auto;
+    margin-bottom: 25px;
+    justify-content: space-between;
+  }
+
+  .alerta_text {
+    font-size: 0.8rem;
+  }
+}

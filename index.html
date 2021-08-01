@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./estilos.css" />
+    <title>OpenWeather</title>
+  </head>
+  <body onload="window.weatherData.loadPage(event)">
+    <div class="modal_Alert" id="modal_Alert_NoCookies">
+      <p class="modal_Alert_text" id="modal_Alert_text_NoCookies"></p>
+    </div>
+
+    <div class="topClimas" id="top">
+      <div class="topClimasConteiner">
+        <p class="topClimas_tit" id="topClimas_frio"></p>
+        <p class="topClimas_tit" id="topClimas_sinClimas"></p>
+        <p class="topClimas_tit" id="topClimas_humedo"></p>
+      </div>
+    </div>
+
+    <div class="conteiner">
+      <main>
+        <h1>Open Weather</h1>
+
+        <div class="panelSection">
+          <form class="formBusqueda" onsubmit="window.weatherData.get(event)">
+            <label for="input_clima1">Buscar una ciuad</label>
+            <input
+              type="text"
+              placeholder="Ingrese el nombre o id de una ciudad"
+              id="input_clima1"
+              value=""
+            />
+            <button type="submit">Buscar</button>
+            <p class="formBusqueda_alertSection" id="formBusqueda_alertSection"></p>
+          </form>
+
+          <form
+            class="formOptions"
+            onsubmit="window.weatherData.aplicarCambios(event)"
+            name="formOptios"
+          >
+            <div class="configuracionDeOrden">
+              <h3>Ordernar por:</h3>
+              <div>
+                <input type="radio" value="Temp" id="ord_temp" name="orden" />
+                <label for="ord_temp">Temperatura</label>
+              </div>
+
+              <div>
+                <input type="radio" value="Hum" id="ord_hume" name="orden" />
+                <label for="ord_hume">Humedad</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  value="Nomb"
+                  id="ord_ciudad"
+                  name="orden"
+                  checked
+                />
+                <label for="ord_ciudad">Ciudad</label>
+              </div>
+
+              <div>
+                <input type="radio" value="Cod" id="ord_codigo" name="orden" />
+                <label for="ord_codigo">Codigo</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  value="asc o desc"
+                  id="ord_asc"
+                  name="orden"
+                />
+                <label for="ord_asc">Descendente</label>
+              </div>
+
+              <button type="submit" class="btn_aplicar" id="btn_aplicar">
+                Ordenar
+              </button>
+            </div>
+
+            <div class="seccionMasOpciones">
+              <div class="autoLoadArea">
+                <div class="chbx_area">
+                  <input type="checkbox" id="checkbox_autoload" checked />
+                  <label for="checkbox_autoload">Recargar cada 5 minutos</label>
+                </div>
+                <p>
+                  AutoLoad: <br />
+                  <span id="AL_status">OFF</span>
+                </p>
+              </div>
+
+              <button
+                class="btn-EliminarTodos"
+                id="btn-EliminarTodos"
+                onclick="window.weatherData.borrarData(event)"
+              >
+                Eliminar todos
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="divBTN_actualizar" id="divBTN_actualizar">
+          <div id="div_subir" class="div_subir">
+            <a class="btn_subir" href="#top">Subir</a>
+          </div>
+          <button
+            onclick="window.weatherData.actualizar(event)"
+            class="btn-actualizar"
+            id="btn-actualizar"
+          >
+            Actualizar
+          </button>
+        </div>
+
+        <div id="root" class="root"></div>
+      </main>
+    </div>
+
+    <div class="alertSecction" id="alerta_footer">
+      <p class="alerta_text" id="alerta_footer_text"></p>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
