@@ -223,11 +223,11 @@
       "<span class='tempMin'>" +
       obj.main.temp_min +
       "</span> ";
-    // titulo temperatura terminca
+    // titulo temperatura termica
     let temperaturaData_termica_tit = document.createElement("h4");
     temperaturaData_termica_tit.classList.add("temperatura_tit");
-    temperaturaData_termica_tit.textContent = "Terminca";
-    //Temperatura terminca
+    temperaturaData_termica_tit.textContent = "Termica";
+    //Temperatura termica
     let temperaturaData_termica_cont = document.createElement("p");
     temperaturaData_termica_cont.classList.add("temperatura_contenido");
     temperaturaData_termica_cont.innerHTML = obj.main.feels_like;
